@@ -156,12 +156,16 @@ Y88..88P 888 d88P Y88b.       888 Y88..88P Y88b 888      X88
     options = parser.parse_args()
 
     if options.db is not None:
-        if options.nocolor is not None:
-            YELLOW=GREEN=WHITE=LIGHTCYAN=NOCOLOR=''
-        if options.log is not None or options.output is not None:
-            get_logs(options.db)
+        import os
+        if os.stat(options.db).st_size == 0:
+            print(YELLOW,"\nThe file: "+options.db+" is empty!\n",NOCOLOR)
         else:
-            print_info(options.db)
+            if options.nocolor is not None:
+                YELLOW=GREEN=WHITE=LIGHTCYAN=NOCOLOR=''
+            if options.log is not None or options.output is not None:
+                get_logs(options.db)
+            else:
+                print_info(options.db)
         
     # exit program normally
     sys.exit(1)
