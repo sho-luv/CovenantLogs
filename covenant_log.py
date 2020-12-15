@@ -108,7 +108,7 @@ def get_logs(sqlfile):
                 start_time, end_time, command, output, hostname, destination, operator, log_time = row
                 destination = destination.replace('"', '').replace('[','').replace(']','')
                 if options.output is True:
-                    print(GREEN+"[+] "+LIGHTCYAN+operator,"command at",start_time,"completed at",end_time,NOCOLOR)
+                    print(GREEN+"[+] "+WHITE+operator+LIGHTCYAN,"command on",WHITE+hostname+LIGHTCYAN,"at",start_time,"completed at",end_time,NOCOLOR)
                     print(GREEN+"[+] "+LIGHTCYAN+command+NOCOLOR)
                     print(GREEN+"[+] "+LIGHTCYAN+"Results:\n"+YELLOW+output,NOCOLOR)
                 elif options.log is True:
@@ -156,12 +156,12 @@ Y88..88P 888 d88P Y88b.       888 Y88..88P Y88b 888      X88
     options = parser.parse_args()
 
     if options.db is not None:
+        if options.nocolor is not None:
+            YELLOW=GREEN=WHITE=LIGHTCYAN=NOCOLOR=''
         import os
         if os.stat(options.db).st_size == 0:
             print(YELLOW,"\nThe file: "+options.db+" is empty!\n",NOCOLOR)
         else:
-            if options.nocolor is not None:
-                YELLOW=GREEN=WHITE=LIGHTCYAN=NOCOLOR=''
             if options.log is not None or options.output is not None:
                 get_logs(options.db)
             else:
