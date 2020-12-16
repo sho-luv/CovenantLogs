@@ -99,7 +99,7 @@ def get_logs(sqlfile):
                 'FROM GruntCommands '\
                 'INNER JOIN GruntTaskings ON (GruntCommands.Id = GruntTaskings.GruntCommandId)'\
                 'INNER JOIN Grunts ON (GruntCommands.gruntId = Grunts.Id)'\
-                'INNER JOIN CommandOutputs ON (GruntCommands.Id = CommandOutputs.Id)'\
+                'INNER JOIN CommandOutputs ON (GruntCommands.Id = CommandOutputs.GruntCommandId)'\
                 'INNER JOIN Listeners ON (Grunts.listenerId = Listeners.Id)'\
                 'INNER JOIN AspNetUsers ON (GruntCommands.UserId = AspNetUsers.Id);')
 
